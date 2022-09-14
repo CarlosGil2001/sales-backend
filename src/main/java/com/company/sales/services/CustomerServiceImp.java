@@ -142,4 +142,62 @@ public class CustomerServiceImp implements iCustomerService{
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
+
+	//Método guardar actualizar 
+	@Override
+	@Transactional() //Declarar el método como "método trasancional"	
+	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id) {
+		
+		//Instanciar objeto
+		CustomerResponseRest response = new CustomerResponseRest();
+		List<Customer> list = new ArrayList<>();
+						
+			//Manejar errores
+			try {
+				//Actualizar con el id 		
+				Optional<Customer> customerSearch = customerDao.findById(id);
+				
+				//Si el id es encontrado, actualiza
+				if(customerSearch.isPresent()) 
+				{
+					customerSearch.get().setNameCustomer(customer.getNameCustomer());
+					customerSearch.get().setLastNameCustomer(customer.getLastNameCustomer());
+					customerSearch.get().setCityCustomer(customer.getCityCustomer());
+					
+					//Actualizar en la BD
+					Customer customerToUpdate = customerDao.save(customerSearch.get());
+					
+					//Si encuentra el id
+					if(customerToUpdate != null)
+					{
+						list.add(customerToUpdate);
+						response.getCustomerRespose().setCustomer(list);
+						response.setMetadata("Respuesta exitosa", "00", "CORRECT");
+					}
+					//En caso contrario
+					else
+					{
+						response.setMetadata("Respuesta fallida", "-1", "ERROR");
+						return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.BAD_REQUEST);
+					}
+				}
+				else
+				{
+					response.setMetadata("Respuesta fallida", "-1", "ERROR");
+					return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.NOT_FOUND);
+				}		
+							
+			} catch(Exception e) {
+							
+				//En caso de error
+				response.setMetadata("Respuesta fallida", "-1", "ERROR");
+				e.getStackTrace();
+				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+							
+			}
+						
+			//Retornar respuesta
+			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
+	}
+
 }

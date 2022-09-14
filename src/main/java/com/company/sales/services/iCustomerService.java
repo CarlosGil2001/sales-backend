@@ -15,4 +15,7 @@ public interface iCustomerService {
 	
 	//Método para guardar
 	public ResponseEntity<CustomerResponseRest> save(Customer customer);
+	
+	//Método para Actualizar
+	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id);
 }

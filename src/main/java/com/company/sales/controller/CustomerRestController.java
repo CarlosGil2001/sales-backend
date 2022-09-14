@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,13 @@ public class CustomerRestController {
 	@PostMapping("/customers")
 	public ResponseEntity<CustomerResponseRest> SaveCustomer(@RequestBody Customer customer){
 		ResponseEntity<CustomerResponseRest> response = service.save(customer);  //Llamamos el método save()
+		return response;
+	}
+	
+	//Update customers
+	@PutMapping("/customers/{id}")
+	public ResponseEntity<CustomerResponseRest> UpdateCustomer(@RequestBody Customer customer, @PathVariable Integer id){
+		ResponseEntity<CustomerResponseRest> response = service.update(customer,id);  //Llamamos el método update()
 		return response;
 	}
 	
