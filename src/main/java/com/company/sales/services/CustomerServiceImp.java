@@ -1,6 +1,8 @@
 package com.company.sales.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -23,6 +25,7 @@ public class CustomerServiceImp implements iCustomerService{
 	private iCustomerDao customerDao;
 	
 	
+	//Método mostrar todos los customers
 	@Override
 	@Transactional() //Declarar el método como "método trasancional"
 	
@@ -50,6 +53,49 @@ public class CustomerServiceImp implements iCustomerService{
 		
 		//Retornar respuesta
 		return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
+	}
+
+	
+	//Método para buscar por id 
+	@Override
+	@Transactional() //Declarar el método como "método trasancional"
+	public ResponseEntity<CustomerResponseRest> searchById(Integer id) {
+		
+		//Instanciar objeto
+		CustomerResponseRest response = new CustomerResponseRest();
+		List<Customer> list = new ArrayList<>();
+				
+			//Manejar errores
+			try {
+				
+				Optional<Customer> customer = customerDao.findById(id);
+				//Si el objeto existe
+				if(customer.isPresent()) 
+				{
+					list.add(customer.get());
+					response.getCustomerRespose().setCustomer(list);
+					response.setMetadata("Respuesta fallida", "00", "Categoría encontrada");
+
+				}
+				//En caso contrario
+				else
+				{
+					response.setMetadata("Respuesta fallida", "-1", "Categoría no encontrada");
+					return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.NOT_FOUND);	
+				}
+				
+					
+			} catch(Exception e) {
+					
+				//En caso de error
+				response.setMetadata("Respuesta fallida", "-1", "ERROR");
+				e.getStackTrace();
+				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+					
+			}
+				
+			//Retornar respuesta
+			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
 }

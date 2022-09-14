@@ -33,13 +33,8 @@ public class Customer implements Serializable{
 		
 		
 		//Attribute names equal to those in the database
-		@Column(name="NameCustomer")
 		private String nameCustomer;
-		
-		@Column(name="LastNameCustomer")
 		private String lastNameCustomer;
-		
-		@Column(name="CityCustomer")
 		private String cityCustomer;
 
 		
