@@ -143,7 +143,7 @@ public class CustomerServiceImp implements iCustomerService{
 	}
 
 
-	//Método guardar actualizar 
+	//Método actualizar 
 	@Override
 	@Transactional() //Declarar el método como "método trasancional"	
 	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id) {
@@ -196,6 +196,34 @@ public class CustomerServiceImp implements iCustomerService{
 							
 			}
 						
+			//Retornar respuesta
+			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
+	}
+
+
+	//Método eliminar 
+	@Override
+	@Transactional() //Declarar el método como "método trasancional"	
+	public ResponseEntity<CustomerResponseRest> deleteById(Integer id) {
+		
+		//Instanciar objeto
+		  CustomerResponseRest response = new CustomerResponseRest();
+				
+			//Manejar errores
+			try {
+					
+				customerDao.deleteById(id);
+				response.setMetadata("Respuesta exitosa", "00", "CORRECT");
+					
+			} catch(Exception e) {
+					
+				//En caso de error
+				response.setMetadata("Respuesta fallida", "-1", "ERROR");
+				e.getStackTrace();
+				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+					
+			}
+				
 			//Retornar respuesta
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}

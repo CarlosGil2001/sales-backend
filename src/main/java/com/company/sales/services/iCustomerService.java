@@ -18,4 +18,7 @@ public interface iCustomerService {
 	
 	//Método para Actualizar
 	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id);
+	
+	//Método para Eliminar
+	public ResponseEntity<CustomerResponseRest> deleteById(Integer id);
 }
