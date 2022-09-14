@@ -40,7 +40,7 @@ public class CustomerServiceImp implements iCustomerService{
 			
 			List<Customer> customer = (List<Customer>) customerDao.findAll();
 			response.getCustomerRespose().setCustomer(customer); //Setter la lista de todas los customer
-			response.setMetadata("Respuesta Ok", "00", "Respuesta exitosa"); //llenamos el metadata
+			response.setMetadata("Respuesta exitosa", "00", "CORRECT"); //llenamos el metadata
 			
 		} catch(Exception e) {
 			
@@ -74,7 +74,7 @@ public class CustomerServiceImp implements iCustomerService{
 				{
 					list.add(customer.get());
 					response.getCustomerRespose().setCustomer(list);
-					response.setMetadata("Respuesta fallida", "00", "ERROR");
+					response.setMetadata("Respuesta exitosa", "00", "CORRECT");
 
 				}
 				//En caso contrario
@@ -119,6 +119,7 @@ public class CustomerServiceImp implements iCustomerService{
 					//Guardamos
 					list.add(customerSaved);
 					response.getCustomerRespose().setCustomer(list);
+					response.setMetadata("Respuesta exitosa", "00", "CORRECT");
 				}
 				//En caso contrario
 				else
