@@ -74,14 +74,57 @@ public class CustomerServiceImp implements iCustomerService{
 				{
 					list.add(customer.get());
 					response.getCustomerRespose().setCustomer(list);
-					response.setMetadata("Respuesta fallida", "00", "Categoría encontrada");
+					response.setMetadata("Respuesta fallida", "00", "ERROR");
 
 				}
 				//En caso contrario
 				else
 				{
-					response.setMetadata("Respuesta fallida", "-1", "Categoría no encontrada");
+					response.setMetadata("Respuesta fallida", "-1", "ERROR");
 					return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.NOT_FOUND);	
+				}
+				
+					
+			} catch(Exception e) {
+					
+				//En caso de error
+				response.setMetadata("Respuesta fallida", "-1", "ERROR");
+				e.getStackTrace();
+				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+					
+			}
+				
+			//Retornar respuesta
+			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
+	}
+
+
+	//Método guardar customer 
+	@Override
+	@Transactional() //Declarar el método como "método trasancional"
+	public ResponseEntity<CustomerResponseRest> save(Customer customer) {
+		
+		//Instanciar objeto
+		CustomerResponseRest response = new CustomerResponseRest();
+		List<Customer> list = new ArrayList<>();
+				
+			//Manejar errores
+			try {
+				
+				Customer customerSaved = customerDao.save(customer);
+				
+				//Si hay respuesta
+				if(customerSaved != null)
+				{
+					//Guardamos
+					list.add(customerSaved);
+					response.getCustomerRespose().setCustomer(list);
+				}
+				//En caso contrario
+				else
+				{
+					response.setMetadata("Respuesta fallida", "-1", "ERROR");
+					return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.BAD_REQUEST);
 				}
 				
 					

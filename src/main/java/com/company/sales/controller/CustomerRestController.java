@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.sales.model.Customer;
 import com.company.sales.response.CustomerResponseRest;
 import com.company.sales.services.iCustomerService;
 
@@ -31,4 +34,13 @@ public class CustomerRestController {
 		ResponseEntity<CustomerResponseRest> response = service.searchById(id);  //Llamamos el método searchById()
 		return response;
 	}
+	
+	//Save customers
+	@PostMapping("/customers")
+	public ResponseEntity<CustomerResponseRest> SaveCustomer(@RequestBody Customer customer){
+		ResponseEntity<CustomerResponseRest> response = service.save(customer);  //Llamamos el método save()
+		return response;
+	}
+	
+	
 }
