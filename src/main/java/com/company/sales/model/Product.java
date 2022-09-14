@@ -16,25 +16,27 @@ import lombok.Data;
 // Usamos Lombok para la creación de getters y setters
 @Data
 @Entity
-@Table(name="customers")
-public class Customer implements Serializable{
+@Table(name="products")
+public class Product implements Serializable{
 	
 
 	//Attributes the Class
 	
 	private static final long serialVersionUID = 1L;
 
+
 		//Specify ID and autoincrement
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name="CodCustomer")
+		@Column(name="CodProduct")
 		private Integer id;
 		
 		
 		//Attribute names equal to those in the database
-		private String nameCustomer;
-		private String lastNameCustomer;
-		private String cityCustomer;
+		private String nameProduct;
+		private String categoryProduct;
+		private float priceProduct;
+		private String statusProduct;
 
 		
 }

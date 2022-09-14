@@ -2,6 +2,7 @@ package com.company.sales.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.company.sales.model.Customer;
 import com.company.sales.response.CustomerResponseRest;
 import com.company.sales.services.iCustomerService;
 
+@CrossOrigin(origins = {"http://127.0.0.1:4200"})
 @RestController
 @RequestMapping("/api/v1")  //Para el uso de las apis
 public class CustomerRestController {
@@ -26,7 +28,7 @@ public class CustomerRestController {
 	//Get all the customers
 	@GetMapping("/customers")
 	public ResponseEntity<CustomerResponseRest> FindAllCustomer(){
-		ResponseEntity<CustomerResponseRest> response = service.search();  //Llamamos el método seacrh()
+		ResponseEntity<CustomerResponseRest> response = service.search();  //Llamamos el método search()
 		return response;
 	}
 	
