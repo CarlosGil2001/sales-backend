@@ -9,4 +9,7 @@ public interface iProductService {
 	//Método para buscar los customers;
 	public ResponseEntity<ProductResponseRest> search();
 	
+	//Método para product por id
+	public ResponseEntity<ProductResponseRest> searchById(Integer id);
+	
 }

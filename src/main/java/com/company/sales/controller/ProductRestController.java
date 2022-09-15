@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.sales.response.CustomerResponseRest;
 import com.company.sales.response.ProductResponseRest;
 import com.company.sales.services.iProductService;
 
@@ -24,6 +26,13 @@ public class ProductRestController {
 		@GetMapping("/products")
 		public ResponseEntity<ProductResponseRest> FindAllProducts(){
 			ResponseEntity<ProductResponseRest> response = service.search();  //Llamamos el método search()
+			return response;
+		}
+		
+		//Get product by id
+		@GetMapping("/products/{id}")
+		public ResponseEntity<ProductResponseRest> FindOneCustomer(@PathVariable Integer id){
+			ResponseEntity<ProductResponseRest> response = service.searchById(id);  //Llamamos el método searchById()
 			return response;
 		}
 }
