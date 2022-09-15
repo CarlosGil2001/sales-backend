@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-//Entidad mapeada como una tabla en la bd
+//Entity mapped as a table in the database
 
-// Usamos Lombok para la creación de getters y setters
+//We use Lombok for the creation of getters and setters
 @Data
 @Entity
 @Table(name="products")
@@ -28,14 +28,18 @@ public class Product implements Serializable{
 		//Specify ID and autoincrement
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name="CodProduct")
+		@Column(name="cod_product")
 		private Integer id;
 		
 		
 		//Attribute names equal to those in the database
+		@Column(name="name_product")
 		private String nameProduct;
+		@Column(name="category_product")
 		private String categoryProduct;
+		@Column(name="price_product")
 		private float priceProduct;
+		@Column(name="status_product")
 		private String statusProduct = "Active";
 
 		

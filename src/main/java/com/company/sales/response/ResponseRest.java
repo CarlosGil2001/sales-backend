@@ -1,14 +1,14 @@
 package com.company.sales.response;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-//Respuesta al servicio
+import java.util.HashMap;
+//Response to the service
 public class ResponseRest {
 	
 	private ArrayList<HashMap<String, String>> metadata = new ArrayList<>();
 
-	//Métodos de metadata
+	//Metadata methods
 	public ArrayList<HashMap<String, String>> getMetadata() {
 		return metadata;
 	}

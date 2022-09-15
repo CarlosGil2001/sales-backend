@@ -3,14 +3,14 @@ package com.company.sales.response;
 import lombok.Getter;
 import lombok.Setter;
 
-//Utilizamos Lombok para Getter y Setter
+//We use Lombok for Getter and Setter
 @Getter
 @Setter
 
-//Heredamos la clase ResponseRest
+//We inherit the ResponseRest class
 public class ProductResponseRest extends ResponseRest{
 	
-	//Instanciamos
+	// instantiate
 	private ProductResponse productResponse = new ProductResponse();
 	
 }

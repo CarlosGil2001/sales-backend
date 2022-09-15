@@ -7,18 +7,18 @@ import com.company.sales.response.CustomerResponseRest;
 
 public interface iCustomerService {
 	
-	//Método para buscar los customers;
+	//Method list clients
 	public ResponseEntity<CustomerResponseRest> search();
 	
-	//Método para customer por id
+	//Method for client by id
 	public ResponseEntity<CustomerResponseRest> searchById(Integer id);
 	
-	//Método para guardar
+	//Method to save
 	public ResponseEntity<CustomerResponseRest> save(Customer customer);
 	
-	//Método para Actualizar
+	//Method to Update
 	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id);
 	
-	//Método para Eliminar
+	//Method to Delete
 	public ResponseEntity<CustomerResponseRest> deleteById(Integer id);
 }

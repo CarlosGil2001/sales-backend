@@ -6,7 +6,7 @@ import com.company.sales.model.Product;
 
 import lombok.Data;
 
-//Crear los métodos con Lombok
+//Create the methods with Lombok
 @Data
 public class ProductResponse {
 	private List<Product> product;

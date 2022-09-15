@@ -15,61 +15,61 @@ import com.company.sales.dao.iCustomerDao;
 import com.company.sales.model.Customer;
 import com.company.sales.response.CustomerResponseRest;
 
-//Indicar que es una clase de servicio
+//Indicate that it is a service class
 @Service
 
-//Implementación
+//Implementation
 public class CustomerServiceImp implements iCustomerService{
 	
-	@Autowired  //Injectar este objeto para usarlo en spring
+	@Autowired  //Inject this object to use in spring
 	private iCustomerDao customerDao;
 	
 	
-	//Método mostrar todos los customers
+	// Show all clients method
 	@Override
-	@Transactional() //Declarar el método como "método trasancional"
+	@Transactional() //Declare the method as "transactional method"
 	
 	
 	public ResponseEntity<CustomerResponseRest> search() {
 		
-		//Instanciar objeto
+		//instantiate object
 		CustomerResponseRest response = new CustomerResponseRest();
 		
-		//Manejar errores
+		//handle errors
 		try {
 			
 			List<Customer> customer = (List<Customer>) customerDao.findAll();
-			response.getCustomerRespose().setCustomer(customer); //Setter la lista de todas los customer
-			response.setMetadata("Respuesta exitosa", "00", "CORRECT"); //llenamos el metadata
+			response.getCustomerRespose().setCustomer(customer); // Set the list of all clients
+			response.setMetadata("Respuesta exitosa", "00", "CORRECT"); //fill the metadata
 			
 		} catch(Exception e) {
 			
-			//En caso de error
+			//In case of error
 			response.setMetadata("Respuesta fallida", "-1", "ERROR");
 			e.getStackTrace();
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 		
-		//Retornar respuesta
+		//Return response
 		return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
 	
-	//Método para buscar por id 
+	//Method to search by id
 	@Override
-	@Transactional() //Declarar el método como "método trasancional"
+	@Transactional() //Declare the method as "transactional method"
 	public ResponseEntity<CustomerResponseRest> searchById(Integer id) {
 		
-		//Instanciar objeto
+		//Instantiate object
 		CustomerResponseRest response = new CustomerResponseRest();
 		List<Customer> list = new ArrayList<>();
 				
-			//Manejar errores
+		//Handling errors
 			try {
 				
 				Optional<Customer> customer = customerDao.findById(id);
-				//Si el objeto existe
+				//if the object exists
 				if(customer.isPresent()) 
 				{
 					list.add(customer.get());
@@ -77,7 +77,7 @@ public class CustomerServiceImp implements iCustomerService{
 					response.setMetadata("Respuesta exitosa", "00", "CORRECT");
 
 				}
-				//En caso contrario
+				//Otherwise
 				else
 				{
 					response.setMetadata("Respuesta fallida", "-1", "ERROR");
@@ -87,41 +87,41 @@ public class CustomerServiceImp implements iCustomerService{
 					
 			} catch(Exception e) {
 					
-				//En caso de error
+				//In case of error
 				response.setMetadata("Respuesta fallida", "-1", "ERROR");
 				e.getStackTrace();
 				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 					
 			}
 				
-			//Retornar respuesta
+			//Return response
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
 
-	//Método guardar customer 
+	//Save client method
 	@Override
-	@Transactional() //Declarar el método como "método trasancional"
+	@Transactional() //Declare the method as "transactional method"
 	public ResponseEntity<CustomerResponseRest> save(Customer customer) {
 		
-		//Instanciar objeto
+		//Instantiate object
 		CustomerResponseRest response = new CustomerResponseRest();
 		List<Customer> list = new ArrayList<>();
 				
-			//Manejar errores
+			//Handling errors
 			try {
 				
 				Customer customerSaved = customerDao.save(customer);
 				
-				//Si hay respuesta
+				//if there is response
 				if(customerSaved != null)
 				{
-					//Guardamos
+					// We save
 					list.add(customerSaved);
 					response.getCustomerRespose().setCustomer(list);
 					response.setMetadata("Respuesta exitosa", "00", "CORRECT");
 				}
-				//En caso contrario
+				//Otherwise
 				else
 				{
 					response.setMetadata("Respuesta fallida", "-1", "ERROR");
@@ -131,50 +131,50 @@ public class CustomerServiceImp implements iCustomerService{
 					
 			} catch(Exception e) {
 					
-				//En caso de error
+				//In case of error
 				response.setMetadata("Respuesta fallida", "-1", "ERROR");
 				e.getStackTrace();
 				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 					
 			}
 				
-			//Retornar respuesta
+			//Return response
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
 
-	//Método actualizar 
+	//Update method
 	@Override
-	@Transactional() //Declarar el método como "método trasancional"	
+	@Transactional() //Declare the method as "transactional method"	
 	public ResponseEntity<CustomerResponseRest> update(Customer customer, Integer id) {
 		
-		//Instanciar objeto
+		//Instantiate object
 		CustomerResponseRest response = new CustomerResponseRest();
 		List<Customer> list = new ArrayList<>();
 						
-			//Manejar errores
+			//Handling errors
 			try {
-				//Actualizar con el id 		
+				// Update with the id		
 				Optional<Customer> customerSearch = customerDao.findById(id);
 				
-				//Si el id es encontrado, actualiza
+				//If the id is found, update
 				if(customerSearch.isPresent()) 
 				{
 					customerSearch.get().setNameCustomer(customer.getNameCustomer());
 					customerSearch.get().setLastNameCustomer(customer.getLastNameCustomer());
 					customerSearch.get().setCityCustomer(customer.getCityCustomer());
 					
-					//Actualizar en la BD
+					//Update in the DB
 					Customer customerToUpdate = customerDao.save(customerSearch.get());
 					
-					//Si encuentra el id
+					//If find the id
 					if(customerToUpdate != null)
 					{
 						list.add(customerToUpdate);
 						response.getCustomerRespose().setCustomer(list);
 						response.setMetadata("Respuesta exitosa", "00", "CORRECT");
 					}
-					//En caso contrario
+					//Otherwise
 					else
 					{
 						response.setMetadata("Respuesta fallida", "-1", "ERROR");
@@ -189,27 +189,27 @@ public class CustomerServiceImp implements iCustomerService{
 							
 			} catch(Exception e) {
 							
-				//En caso de error
+				//In case of error
 				response.setMetadata("Respuesta fallida", "-1", "ERROR");
 				e.getStackTrace();
 				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 							
 			}
 						
-			//Retornar respuesta
+			//Return response
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 
 
-	//Método eliminar 
+	//Delete method
 	@Override
-	@Transactional() //Declarar el método como "método trasancional"	
+	@Transactional() //Declare the method as "transactional method"
 	public ResponseEntity<CustomerResponseRest> deleteById(Integer id) {
 		
-		//Instanciar objeto
+		//Instantiate object
 		  CustomerResponseRest response = new CustomerResponseRest();
 				
-			//Manejar errores
+		  	//Handle errors
 			try {
 					
 				customerDao.deleteById(id);
@@ -217,14 +217,14 @@ public class CustomerServiceImp implements iCustomerService{
 					
 			} catch(Exception e) {
 					
-				//En caso de error
+				//In case of error
 				response.setMetadata("Respuesta fallida", "-1", "ERROR");
 				e.getStackTrace();
 				return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 					
 			}
 				
-			//Retornar respuesta
+			//Return response
 			return new ResponseEntity<CustomerResponseRest>(response, HttpStatus.OK);
 	}
 

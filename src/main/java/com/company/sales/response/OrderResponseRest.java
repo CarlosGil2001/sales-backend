@@ -1,6 +1,5 @@
 package com.company.sales.response;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +8,8 @@ import lombok.Setter;
 @Setter
 
 //We inherit the ResponseRest class
-public class CustomerResponseRest extends ResponseRest{
+public class OrderResponseRest extends ResponseRest{
 	
 	// instantiate
-	private CustomerResponse customerRespose = new CustomerResponse();
-	
+	private OrderResponse productResponse = new OrderResponse();
 }

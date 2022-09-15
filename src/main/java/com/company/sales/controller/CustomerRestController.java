@@ -16,40 +16,40 @@ import com.company.sales.model.Customer;
 import com.company.sales.response.CustomerResponseRest;
 import com.company.sales.services.iCustomerService;
 
-@CrossOrigin(origins = {"http://127.0.0.1:4200"})
+@CrossOrigin(origins = {"127.0.0.1:8080"})
 @RestController
-@RequestMapping("/api/v1")  //Para el uso de las apis
+@RequestMapping("/api/v1")  //For the use of the api
 public class CustomerRestController {
 	
-	//Instanciar la interface
+	//Instantiate the interface
 	@Autowired
 	private iCustomerService service;
 	
 	//Get all the customers
 	@GetMapping("/customers")
 	public ResponseEntity<CustomerResponseRest> FindAllCustomer(){
-		ResponseEntity<CustomerResponseRest> response = service.search();  //Llamamos el método search()
+		ResponseEntity<CustomerResponseRest> response = service.search();  //We call it the search() method
 		return response;
 	}
 	
 	//Get customers by id
 	@GetMapping("/customers/{id}")
 	public ResponseEntity<CustomerResponseRest> FindOneCustomer(@PathVariable Integer id){
-		ResponseEntity<CustomerResponseRest> response = service.searchById(id);  //Llamamos el método searchById()
+		ResponseEntity<CustomerResponseRest> response = service.searchById(id);  //We call it the searchById() method
 		return response;
 	}
 	
 	//Save customers
 	@PostMapping("/customers")
 	public ResponseEntity<CustomerResponseRest> SaveCustomer(@RequestBody Customer customer){
-		ResponseEntity<CustomerResponseRest> response = service.save(customer);  //Llamamos el método save()
+		ResponseEntity<CustomerResponseRest> response = service.save(customer);  //We call it the save() method
 		return response;
 	}
 	
 	//Update customers
 	@PutMapping("/customers/{id}")
 	public ResponseEntity<CustomerResponseRest> UpdateCustomer(@RequestBody Customer customer, @PathVariable Integer id){
-		ResponseEntity<CustomerResponseRest> response = service.update(customer,id);  //Llamamos el método update()
+		ResponseEntity<CustomerResponseRest> response = service.update(customer,id);  //We call it the update() method
 		return response;
 	}
 	
@@ -57,7 +57,7 @@ public class CustomerRestController {
 	//Delete customers
 	@DeleteMapping("/customers/{id}")
 	public ResponseEntity<CustomerResponseRest> deleteCustomer(@PathVariable Integer id){
-		ResponseEntity<CustomerResponseRest> response = service.deleteById(id);  //Llamamos el método deleteById()
+		ResponseEntity<CustomerResponseRest> response = service.deleteById(id);  //We call it the deleteById() method
 		return response;
 	}
 	

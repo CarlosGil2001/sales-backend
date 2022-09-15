@@ -3,23 +3,22 @@ package com.company.sales.services;
 import org.springframework.http.ResponseEntity;
 
 import com.company.sales.model.Product;
-import com.company.sales.response.CustomerResponseRest;
 import com.company.sales.response.ProductResponseRest;
 
 public interface iProductService {
 
-	//Método para buscar los customers;
+	//Method list products
 	public ResponseEntity<ProductResponseRest> search();
 	
-	//Método para product por id
+	//Method for product by id
 	public ResponseEntity<ProductResponseRest> searchById(Integer id);
 	
-	//Método para guardar
+	//Method to save
 	public ResponseEntity<ProductResponseRest> save(Product product);
 	
-	//Método para Actualizar
+	//Method to update
 	public ResponseEntity<ProductResponseRest> update(Product product, Integer id);
 	
-	//Método para Eliminar (Cambiar status)
+	//Method to delete (update status)
 	public ResponseEntity<ProductResponseRest> searchById(Product product,Integer id);
 }

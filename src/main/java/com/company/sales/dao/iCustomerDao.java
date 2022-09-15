@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface iCustomerDao extends CrudRepository<Customer, Integer>{
 	
-	//Métodos para acceder a los datos
+	//Methods to access the data
 
 }
