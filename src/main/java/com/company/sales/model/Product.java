@@ -36,7 +36,7 @@ public class Product implements Serializable{
 		private String nameProduct;
 		private String categoryProduct;
 		private float priceProduct;
-		private String statusProduct;
+		private String statusProduct = "Active";
 
 		
 }
